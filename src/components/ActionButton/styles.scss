@@ -1,0 +1,11 @@
+div.action-button {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  font-weight: bold;
+  &-circle-wrap {
+    border-radius: 15px;
+    background-color: #F5F6F7;
+  }
+}

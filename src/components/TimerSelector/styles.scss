@@ -1,0 +1,45 @@
+.timer-selector {
+  height: 100%;
+  width: 100%;
+  .time-line {
+    font-size: 10px;
+    height: 100%;
+    &-day {
+      position: absolute;
+      transition: all 1s linear;
+      left: 0px;
+      width: 485px;
+      height: 80%;
+      display: inline-block;
+      .time-line-item {
+        height: 42px;
+        width: 20px;
+        display: inline-block;
+        line-height: 21px;
+        vertical-align: middle;
+        text-align: center;
+        &-9pm,&-10pm,&-11pm,&-12am,&-1am,&-2am,&-3am,&-4am,&-5am {
+          background-color: #323D48;
+          color: #fff;
+        }
+        &-6am,&-7am,&-6pm,&-7pm,&-8pm {
+          background-color: #DBEDFF;
+          color: #000;
+        }
+        &-8am,&-9am,&-10am,&-11am,&-12pm,&-1pm,&-2pm,&-3pm,&-4pm,&-5pm {
+          background-color: #F5F6F7;
+          color: #000;
+        }
+      }
+      .start-of-day {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      .end-of-day {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        margin-right: 1px;
+      }
+    }
+  }
+}

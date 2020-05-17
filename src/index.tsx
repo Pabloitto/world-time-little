@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'font-awesome/css/font-awesome.min.css';
-import MainScreen from './screens/Main/MainScreen';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import { AppScreen } from './screens/App/AppScreen';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <MainScreen />,
+  <AppScreen />,
   document.getElementById('root')
 );
 

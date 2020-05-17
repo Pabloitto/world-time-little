@@ -6,10 +6,10 @@ export class TimeLineBuilder {
     const days = [];
 
     let start = date.startOf('day');
-    let hoursInDay = parseInt(date.endOf('day').format('HH'), 10);
+    let hoursInDay = parseInt(date.endOf('day').format('HH'), 10) + 1;
 
     for (let i = 0; i < hoursInDay; i++) {
-      const current = start.add(1, 'hour').add(1, 'second');
+      const current = start.add(1, 'hour');
       days.push(current.valueOf());
     }
 
@@ -17,8 +17,11 @@ export class TimeLineBuilder {
   }
   translateToTimeZone(place: any, timeLine: number[]) {
     return timeLine.map(date => {
-      return moment(date).tz(place.tz).valueOf();
+      return this.translateSingleDate(date, place.tz);
     });
+  }
+  translateSingleDate(timeStamp: number, tz: string) {
+    return moment(timeStamp).tz(tz).valueOf();
   }
   attachTimeLines(places: any[]) {
     if (places.length === 0) {
@@ -41,8 +44,13 @@ export class TimeLineBuilder {
         ...place,
         timeLine: newTimeLine
       }
-    }).sort((a, b) => {
+    });
+
+    // SORT or not ?
+    /**
+     * .sort((a, b) => {
       return b.isDefault - a.isDefault;
     });
+     */
   }
 }
