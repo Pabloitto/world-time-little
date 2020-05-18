@@ -24,10 +24,10 @@ describe('<TimeLineItem />', () => {
   it('should render next day name when 12 am is present as timeline item', () => {
     const currentDay = '1955-11-05';
     const currentHour = 24;
-    const today = moment(currentDay).tz('America/Hermosillo').set({ hours: currentHour, minutes: 1 });
-    const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
-
-    console.log("TEST**", today.format('YYYY-MM-DD HH:mm A'));
+    const today = moment(currentDay).tz('America/Hermosillo').startOf('day');
+    const timeSpan = today.clone().set({
+      hours: currentHour
+    }).valueOf();
 
     const { getByText } = render((
       <TimeLineItem
@@ -36,15 +36,17 @@ describe('<TimeLineItem />', () => {
         currentDate={today}
       />
     ));
-    const textElement = getByText(/Nov 06/i);
+    const textElement = getByText(/Nov 05/i);
     expect(textElement).toBeInTheDocument();
   });
 
   it('should render next day name when 12 am is present as timeline item', () => {
     const currentDay = '1955-11-05';
     const currentHour = 24;
-    const today = moment(currentDay).tz('America/Hermosillo').set({ hours: currentHour, minutes: 1 });
-    const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
+    const today = moment(currentDay).tz('America/Hermosillo').startOf('day');
+    const timeSpan = today.clone().set({ 
+      hours: currentHour
+    }).valueOf();
 
     const { container, getByText } = render((
       <TimeLineItem
@@ -53,7 +55,7 @@ describe('<TimeLineItem />', () => {
         currentDate={today}
       />
     ));
-    const textElement = getByText(/Nov 06/i);
+    const textElement = getByText(/Nov 05/i);
     expect(textElement).toBeInTheDocument();
     expect(container.querySelector('.start-of-day')).toBeInTheDocument();
   });
