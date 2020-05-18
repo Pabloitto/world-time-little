@@ -7,6 +7,8 @@ A Simple DEMO App to compare time zones between countries https://world-time-lit
 [![npm](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Pabloitto/world-time-little/blob/master/LICENSE)
 ![Build Status](https://img.shields.io/static/v1?label=build%20status&message=unknown&color=gray)
 
+![alt text](https://github.com/Pabloitto/world-time-little/blob/master/cover.PNG?raw=true)
+
 **Clone the repo**
 ```
 git clone https://github.com/Pabloitto/world-time-little.git 
