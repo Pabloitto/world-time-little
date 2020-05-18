@@ -44,14 +44,18 @@ describe('<TimeLineRow />', () => {
         tz: 'America/Hermosillo',
         country: 'Mexico',
         city: 'Hermosillo',
-        currentDate: moment('1985-01-01').tz('America/Hermosillo')
+        currentDate: moment('1985-01-01').set({
+          hours: 13
+        }).tz('America/Hermosillo')
       },
       {
         isDefault: false,
         tz: 'America/Mexico_City',
         country: 'Mexico',
         city: 'CDMX',
-        currentDate: moment('1985-01-01').tz('America/Mexico_City')
+        currentDate: moment('1985-01-01').set({
+          hours: 13
+        }).tz('America/Mexico_City')
       }
     ]);
     const handleHomeClick = jest.fn();
@@ -78,7 +82,9 @@ describe('<TimeLineRow />', () => {
         tz: 'America/Hermosillo',
         country: 'Mexico',
         city: 'Hermosillo',
-        currentDate: moment('1985-01-01').tz('America/Hermosillo')
+        currentDate: moment('1985-01-01').set({
+          hours: 13
+        }).tz('America/Hermosillo')
       }
     ]);
     const handleHomeClick = jest.fn();
