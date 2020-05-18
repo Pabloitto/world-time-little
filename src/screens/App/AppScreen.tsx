@@ -113,6 +113,11 @@ export const AppScreen = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-12">
+          <h1 className="text-center text-white">World Time Lite</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
           <div className="card">
             <div className="card-header">
               <SearchInput

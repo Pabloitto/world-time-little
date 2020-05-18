@@ -26,3 +26,28 @@ with this content:
 REACT_APP_GOOGLE_API_URL=https://maps.googleapis.com
 REACT_APP_GOOGLE_API_KEY=[YOUR_GOOGLE_API_KEY]
 ```
+
+
+**Run project in dev mode**
+
+```
+npm run dev
+```
+
+**Run project in prod mode**
+
+```
+npm start
+```
+
+**Run tests**
+
+```
+npm run test
+```
+
+**Run tests with coverage**
+
+```
+npm run test:coverage
+```
