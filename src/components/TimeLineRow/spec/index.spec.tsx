@@ -15,7 +15,9 @@ describe('<TimeLineRow />', () => {
         tz: 'America/Hermosillo',
         country: 'Mexico',
         city: 'Hermosillo',
-        currentDate: moment('1985-10-26').tz('America/Hermosillo')
+        currentDate: moment('1985-10-26').set({
+          hours: 13
+        }).tz('America/Hermosillo')
       }
     ]);
     const handleHomeClick = jest.fn();
