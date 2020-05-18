@@ -20,22 +20,6 @@ describe('<TimeLineItem />', () => {
     const textElement = getByText(/5 pm/i);
     expect(textElement).toBeInTheDocument();
   });
-  it('should render next day name when 12 am is present as timeline item', () => {
-    const currentDay = '1955-11-05';
-    const today = moment(currentDay).tz('America/Hermosillo').startOf('day');
-    const timeSpan = today.clone().tz('America/Hermosillo').valueOf();
-
-    const { container, getByText } = render((
-      <TimeLineItem
-        timeSpan={timeSpan}
-        tz='America/Hermosillo'
-        currentDate={today}
-      />
-    ));
-    const textElement = getByText(/Nov 05/i);
-    expect(textElement).toBeInTheDocument();
-    expect(container.querySelector('.start-of-day')).toBeInTheDocument();
-  });
 
   it('should render current day as end day timeline item', () => {
     const currentDay = '1955-11-12';
