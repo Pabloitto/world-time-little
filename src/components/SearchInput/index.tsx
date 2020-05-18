@@ -1,70 +1,40 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 
-import Autosuggest from 'react-autosuggest';
+import GooglePlacesAutocomplete, { getLatLng, geocodeByPlaceId } from 'react-google-places-autocomplete';
 
-import moment from 'moment-timezone';
-
-import './styles.scss';
-
-const timeZones = moment.tz.names();
-
-const renderSuggestion = (suggestion: any) => (
-  <div>
-    {suggestion}
-  </div>
-);
-
-const getSuggestions = (value: any): string[] => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  if (inputLength === 0) {
-    return [];
-  }
-
-  return timeZones.filter(tz =>
-    tz.toLowerCase().indexOf(inputValue) > -1
-  );
-};
+import 'react-google-places-autocomplete/dist/index.min.css';
 
 export const SearchInput = ({
+  timeZoneService,
   handleSuggestionSelected
 }: any) => {
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [value, setValue] = useState('');
-  
-  const handleOnChange = (event: any, data: any) => {
-    setValue(data.newValue);
-  };
+  const googlePlacesAutocomplete = useRef<any>(null);
 
+  const handleOnSelect = async (data: any) => {
+    const placeId = data.place_id;
+    const mainText = data.structured_formatting.main_text;
+    const secondaryText = data.structured_formatting.secondary_text;
+    const [firstResult] = await geocodeByPlaceId(placeId)
+    const getLocation = await getLatLng(firstResult);
 
-  const onSuggestionsFetchRequested = ({ value }: any) => {
-    setSuggestions(getSuggestions(value));
-  };
+    const timeZoneId = await timeZoneService.fetchTimeZoneIdByLocation(getLocation);
 
-  // Autosuggest will call this function every time you need to clear suggestions.
-  const onSuggestionsClearRequested = () => {
-    setSuggestions([]);
-  };
+    handleSuggestionSelected({
+      timeZoneId,
+      mainText,
+      secondaryText
+    });
 
-  const onSuggestionSelected = (e: any, {suggestion}: any) => {
-    handleSuggestionSelected(suggestion);
-    setValue('');
+    googlePlacesAutocomplete.current.changeValue('');
   };
 
   return (
-    <Autosuggest
-      suggestions={suggestions}
-      onSuggestionsClearRequested={onSuggestionsClearRequested}
-      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-      onSuggestionSelected={onSuggestionSelected}
-      renderSuggestion={renderSuggestion}
-      getSuggestionValue={(suggestion) => suggestion}
-      inputProps={{
-        placeholder: 'Type a time zone',
-        value,
-        onChange: handleOnChange
-      }}
-    />
+    <div>
+      <GooglePlacesAutocomplete
+        ref={googlePlacesAutocomplete}
+        placeholder='Find place and time zone'
+        onSelect={handleOnSelect}
+      />
+    </div>
   );
 }

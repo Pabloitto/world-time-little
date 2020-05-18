@@ -1,8 +1,9 @@
 import React from 'react';
 
-import moment from 'moment-timezone';
+// import moment from 'moment-timezone';
 
 import './styles.scss';
+import { TimeLineItem } from './TimeLineItem';
 
 export const TimerSelector = ({
   timeLine,
@@ -10,17 +11,18 @@ export const TimerSelector = ({
   currentDate
 }: any) => {
   const renderTimeLine = () => {
-    return timeLine.reduce((acc: any[], timeStamp: number, i: number) => {
-      const curr = moment(timeStamp).tz(tz);
-      let hour = curr.format('h A').toLowerCase();
-      let stateClass = `time-line-item-${hour.replace(' ', '')}`;
-      if (hour === '12 am') {
-        hour = currentDate.format('MMM DD');
-        stateClass += ' start-of-day'
-      } else if (hour === '11 pm'){
-        stateClass += ' end-of-day';
-      }
-      acc.push(<div key={`${i}-${timeStamp}`} className={`time-line-item ${stateClass}`}>{hour}</div>);
+    if (!timeLine) {
+      return [];
+    }
+    return timeLine.reduce((acc: any[], timeSpan: number, i: number) => {
+      acc.push((
+        <TimeLineItem
+          key={`${i}-${timeSpan}`}
+          timeSpan={timeSpan}
+          tz={tz}
+          currentDate={currentDate}
+        />
+      ));
       return acc;
     }, []);
   }

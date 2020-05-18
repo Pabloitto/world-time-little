@@ -3,38 +3,19 @@ import moment from 'moment-timezone';
 
 import { SearchInput } from '../../components/SearchInput';
 import { TimeLineRow } from '../../components/TimeLineRow';
+import { VerticalBar } from '../../components/VerticalBar';
 
 import { TimeLineBuilder } from '../../utils/TimeLineBuilder';
+import * as timeZoneService from '../../api/TimeZoneService';
 
 import './styles.scss';
-import { VerticalBar } from '../../components/VerticalBar';
 
 const timeLineBuilder = new TimeLineBuilder();
 
-
-const createNewPlace = (timeZoneSelected: string, isDefault: boolean = false) => {
-  const [mainland, country, city] = timeZoneSelected.split('/');
-  return {
-    country: city ? country : mainland,
-    city: city || country,
-    tz: timeZoneSelected,
-    currentDate: moment().tz(timeZoneSelected),
-    isDefault
-  };
-}
-
 export const AppScreen = () => {
   const [cities, setCities] = useState<any[]>([]);
-  const [xIndex, setXIndex] = useState(0);
 
-  /* useEffect(() => {
-    setCities([]);
-    const defaultItem = example.find(city => city.isDefault);
-    if (defaultItem) {
-      changeIndex(defaultItem);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); */
+  const [xIndex, setXIndex] = useState(0);
 
   const changeIndex = (defaultItem: any) => {
     const index = parseInt(moment().tz(defaultItem.tz).format('HH'), 10);
@@ -42,13 +23,14 @@ export const AppScreen = () => {
   }
 
   const handleHomeClick = (index: number) => {
-    const newCities = cities.map((city, i) => {
+    const newCities = cities.map((place, i) => {
       const newDefault = i === index;
       if (newDefault) {
-        changeIndex(city);
+        changeIndex(place);
       }
       return {
-        ...city,
+        ...place,
+        currentDate: moment().tz(place.tz),
         isDefault: newDefault
       };
     });
@@ -88,6 +70,11 @@ export const AppScreen = () => {
   }
 
   const renderCities = () => {
+    if (cities.length === 0) {
+      return <div style={{display: 'flex', justifyContent: 'center'}}>
+        No Time Zones to compare...
+      </div> 
+    }
     return cities.map((place, i) => {
       return (
         <TimeLineRow
@@ -102,8 +89,18 @@ export const AppScreen = () => {
     });
   }
 
-  const handleSuggestionSelected = (timeZoneSelected: string) => {
-    const place = createNewPlace(timeZoneSelected, cities.length === 0);
+  const handleSuggestionSelected = ({
+    secondaryText,
+    mainText,
+    timeZoneId
+  }: any) => {
+    const place = {
+      country: secondaryText,
+      city: mainText,
+      tz: timeZoneId,
+      currentDate: moment().tz(timeZoneId),
+      isDefault: cities.length === 0
+    };
     cities.push(place);
     const defaultItem = cities.find(city => city.isDefault);
     if (defaultItem) {
@@ -118,7 +115,10 @@ export const AppScreen = () => {
         <div className="col-md-12">
           <div className="card">
             <div className="card-header">
-              <SearchInput handleSuggestionSelected={handleSuggestionSelected} />
+              <SearchInput
+                timeZoneService={timeZoneService}
+                handleSuggestionSelected={handleSuggestionSelected}
+              />
             </div>
             <div className="card-body">
               <VerticalBar

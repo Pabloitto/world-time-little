@@ -1,5 +1,6 @@
 import React from 'react';
 
+import './styles.scss';
 export const TextContentItem = ({
   text,
   subText
@@ -7,10 +8,10 @@ export const TextContentItem = ({
   return (
     <div>
       <dl>
-        <dt>
+        <dt className='title'>
           {text}
         </dt>
-        <dd>
+        <dd className='sub-title'>
           {subText}
         </dd>
       </dl>

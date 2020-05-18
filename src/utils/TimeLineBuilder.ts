@@ -2,7 +2,7 @@ import moment from 'moment-timezone';
 
 export class TimeLineBuilder {
   getTimeLineDates(place: any) {
-    const date: moment.Moment = moment().tz(place.tz);
+    const date: moment.Moment = moment(place.currentDate.valueOf()).tz(place.tz);
     const days = [];
 
     let start = date.startOf('day');
