@@ -9,7 +9,7 @@ describe('<TimeLineItem />', () => {
     const currentDay = '2015-10-21';
     const currentHour = 17;
     const today = moment(currentDay).tz('America/Hermosillo');
-    const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
+    const timeSpan = today.clone().tz('America/Hermosillo').set({ hours: currentHour }).valueOf();
     const { getByText } = render((
       <TimeLineItem
         timeSpan={timeSpan}
@@ -23,7 +23,7 @@ describe('<TimeLineItem />', () => {
   it('should render next day name when 12 am is present as timeline item', () => {
     const currentDay = '1955-11-05';
     const today = moment(currentDay).tz('America/Hermosillo').startOf('day');
-    const timeSpan = today.clone().valueOf();
+    const timeSpan = today.clone().tz('America/Hermosillo').valueOf();
 
     const { container, getByText } = render((
       <TimeLineItem
@@ -41,7 +41,7 @@ describe('<TimeLineItem />', () => {
     const currentDay = '1955-11-12';
     const currentHour = 23;
     const today = moment(currentDay).tz('America/Hermosillo').set({ hours: currentHour });
-    const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
+    const timeSpan = today.clone().tz('America/Hermosillo').set({ hours: currentHour }).valueOf();
 
     const { container, getByText } = render((
       <TimeLineItem
