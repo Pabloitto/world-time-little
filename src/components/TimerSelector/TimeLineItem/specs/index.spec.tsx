@@ -24,7 +24,7 @@ describe('<TimeLineItem />', () => {
   it('should render next day name when 12 am is present as timeline item', () => {
     const currentDay = '1955-11-05';
     const currentHour = 24;
-    const today = moment(currentDay).set({ hours: currentHour });
+    const today = moment(currentDay).tz('America/Hermosillo').set({ hours: currentHour });
     const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
 
     const { getByText } = render((
@@ -41,7 +41,7 @@ describe('<TimeLineItem />', () => {
   it('should render next day name when 12 am is present as timeline item', () => {
     const currentDay = '1955-11-05';
     const currentHour = 24;
-    const today = moment(currentDay).set({ hours: currentHour });
+    const today = moment(currentDay).tz('America/Hermosillo').set({ hours: currentHour });
     const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
 
     const { container, getByText } = render((
@@ -59,7 +59,7 @@ describe('<TimeLineItem />', () => {
   it('should render current day as end day timeline item', () => {
     const currentDay = '1955-11-12';
     const currentHour = 23;
-    const today = moment(currentDay).set({ hours: currentHour });
+    const today = moment(currentDay).tz('America/Hermosillo').set({ hours: currentHour });
     const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
 
     const { container, getByText } = render((
