@@ -55,6 +55,6 @@ npm run test:coverage
 ```
 
 **TODO**
-- Make the side responsive
+- Make the web site responsive
 - Increase the test coverage
 - Refactor to use a palette for the colors
