@@ -8,7 +8,7 @@ describe('<TimeLineItem />', () => {
   it('should render 3 pm timeline item', () => {
     const currentDay = '2015-10-21';
     const currentHour = 17;
-    const today = moment(currentDay);
+    const today = moment(currentDay).tz('America/Hermosillo');
     const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
     const { getByText } = render((
       <TimeLineItem
