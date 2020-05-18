@@ -27,6 +27,8 @@ describe('<TimeLineItem />', () => {
     const today = moment(currentDay).tz('America/Hermosillo').set({ hours: currentHour, minutes: 1 });
     const timeSpan = today.clone().set({ hours: currentHour }).valueOf();
 
+    console.log("TEST**", today.format('YYYY-MM-DD HH:mm A'));
+
     const { getByText } = render((
       <TimeLineItem
         timeSpan={timeSpan}
