@@ -15,12 +15,12 @@
     "font-awesome": "^4.7.0",
     "moment": "^2.25.3",
     "moment-timezone": "^0.5.31",
-    "node-sass": "^4.14.1",
+    "node-sass": "^9.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-draggable": "^4.4.2",
     "react-google-places-autocomplete": "^2.0.5",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "typescript": "^3.9.2"
   },
   "scripts": {
